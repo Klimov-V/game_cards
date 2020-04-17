@@ -1,3 +1,41 @@
 * {
     box-sizing: border-box;
 }
+
+
+.card-container {
+    perspective: 1000px;
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+}
+.card-container:hover .card {
+    transform: rotateY(180deg);
+}
+.card-container,
+.card__front,
+.card__back {
+    width: 250px;
+    height: 350px;
+}
+.card {
+    transition: .6s;
+    transform-style: preserve-3d;
+
+    position: relative;
+}
+
+.card__front,
+.card__back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.card__front {
+    background-color: red;
+    z-index: 2;
+}
+.card__back {
+    background-color: green;
+    transform: rotateY(180deg);
+}
