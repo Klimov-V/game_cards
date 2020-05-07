@@ -3,125 +3,100 @@
 * {
     box-sizing: border-box;
 }
-
+body {
+    margin: 0;
+    padding: 20px;
+}
 
 .container {
-    max-width: 900px;
-    margin: 30px auto 0;
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.tabel {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 
-
-
-.scene {
-    background-color: transparent;
-    width: 217px;
-    height: 300px;
-    perspective: 1000px;
-
-    &:hover .card {
-        transform: rotateY(180deg);
-    }
-}
-
 .card {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
+    transition: .6s;
     transform-style: preserve-3d;
-    box-shadow: 0px 0px 5px 0px #000;
-
-    &__face {
+    backface-visibility: hidden;
+    position: relative;
+    
+    &__container {
+        perspective: 1000px;
+        -webkit-perspective: 1000;
+        -moz-perspective: 1000;
+        margin: 20px;
+        &:hover .card {
+            transform: rotateY(180deg);
+        }
+    }
+    &__container,
+    &__front,
+    &__back {
+        width: 250px;
+        height: 350px;
+        border-radius: 10px;
+    }
+    &__front,
+    &__back {
         position: absolute;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
+        top: 0;
+        left: 0;
     }
-    &__face--front {
-        background-color: dodgerblue;
-        color: black;
-    }
-    &__face--back {
+    &__front {
         background-color: #fff;
-        color: red;
-        transform: rotateY(180deg);
+        z-index: 2;
+        text-transform: uppercase;
+        font-size: 50px;
+        box-shadow: 0 0 2px #000;
+        position: relative;
+        padding: 20px;
     }
-
-    &[data-suit="hearts"] &__content:after {
-        content: attr(value "$#9829;");             // тут надо что-то сдклеть, дабы добавить значение и масть чеез data
-        color: red;
+    &__back {
+        background-color: green;
+        transform: rotateY(180deg);
     }
 }
 
 
-// .scene {
-//     perspective: 1000px;
+.hearts, 
+.diamonds {
+    color: red;
+}
+.clubs, 
+.spades {
+    color: black;
+}
 
-//     &:hover .card {
-//         transform: rotateY(180deg);
-//         box-shadow: 0px 0px 49px 0px rgba(20, 20, 21, 0.11);
-//     }
-//     &:hover .card__face--front {
-//         opacity: 0;
-//     }
-// }
+.diamonds:after,
+.diamonds:before {
+  content: attr(data-value) "♦";
+}
 
-// .card {
-//     padding-top: 120%;
-//     width: 100%;
-//     position: relative;
-//     transform-style: preserve-3d;
-//     box-shadow: 0px 0px 2px 0px rgba(20, 20, 21, 0.6);
-//     transition: transform .6s, box-shadow .6s;
-//     border-radius: 5px;
+.spades:after,
+.spades:before {
+  content: attr(data-value) "♠";
+}
 
-//     &__face {
-//         position: absolute;
-//         height: 100%;
-//         width: 100%;
-//         top: 0;
-//         left: 0;
-//         backface-visibility: hidden;
-//         z-index: 1;
-        
+.clubs:after,
+.clubs:before {
+  content: attr(data-value) "♣";
+}
 
-//         &--front {
-//             background: #ff5c36;
-//             border-radius: 5px;
-//         }
-//         &--back {
-//             background: #fff3f0;
-//             transform: rotateY(180deg);
-//         }
-//     }
-    // &__figure,
-    // &__image-wrap {
-    //     position: relative;
-    //     width: 100%;
-    //     height: 100%;
-    //     margin: 0;
-    // }
-    // &__figure {
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: flex-end;
-    //     align-items: center;
-    // }
-    // &__image {
-    //     position: absolute;
-    //     top: 50%;
-    //     left: 50%;
-    //     transform: translate(-50%, -50%);
-    //     min-width: 100%;
-    //     min-height: 100%;
-
-    //     &-wrap {
-    //         overflow: hidden;
-    //         border-radius: 5px;
-    //     }
-    // }
-// }
+.hearts:after,
+.hearts:before {
+  content: attr(data-value) "♥";
+}
+.diamonds:after, 
+.spades:after, 
+.clubs:after, 
+.hearts:after {
+    transform: rotateZ(180deg);
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
