@@ -1,12 +1,30 @@
 * {
     box-sizing: border-box;
 }
+body {
+    margin: 0;
+    padding: 20px;
+}
 
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.tabel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
 
 .card-container {
     perspective: 1000px;
     -webkit-perspective: 1000;
     -moz-perspective: 1000;
+    margin: 0 auto;
 }
 .card-container:hover .card {
     transform: rotateY(180deg);
@@ -20,13 +38,12 @@
 .card {
     transition: .6s;
     transform-style: preserve-3d;
-
+    backface-visibility: hidden;
     position: relative;
 }
 
 .card__front,
 .card__back {
-    backface-visibility: hidden;
     position: absolute;
     top: 0;
     left: 0;
